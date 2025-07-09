@@ -1,0 +1,85 @@
+name: Publish to NPM
+
+on:
+  push:
+    branches: ["main"]
+  # Allow manual triggering
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          # Fetch full history for version checking
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: "npm"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run linting
+        run: npm run lint
+
+      - name: Build library
+        run: npm run build
+
+      - name: Check if version changed
+        id: version-check
+        run: |
+          # Get the current version from package.json
+          CURRENT_VERSION=$(node -p "require('./package.json').version")
+          echo "current-version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
+          
+          # Check if this version exists on npm
+          if npm view simplify-captcha@$CURRENT_VERSION version 2>/dev/null; then
+            echo "Version $CURRENT_VERSION already exists on npm"
+            echo "should-publish=false" >> $GITHUB_OUTPUT
+          else
+            echo "Version $CURRENT_VERSION is new, will publish"
+            echo "should-publish=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Publish to NPM
+        if: steps.version-check.outputs.should-publish == 'true'
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Create GitHub Release
+        if: steps.version-check.outputs.should-publish == 'true'
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ steps.version-check.outputs.current-version }}
+          release_name: Release v${{ steps.version-check.outputs.current-version }}
+          body: |
+            ## Changes in v${{ steps.version-check.outputs.current-version }}
+            
+            This release was automatically created when the package was published to npm.
+            
+            ### Package Info
+            - Package: simplify-captcha@${{ steps.version-check.outputs.current-version }}
+            - NPM: https://www.npmjs.com/package/simplify-captcha
+            
+            For detailed changes, see the commit history.
+          draft: false
+          prerelease: false
+
+      - name: Skip publishing
+        if: steps.version-check.outputs.should-publish == 'false'
+        run: |
+          echo "⏭️ Skipping publish - version ${{ steps.version-check.outputs.current-version }} already exists on npm"
+          echo "To publish a new version:"
+          echo "1. Update the version in package.json"
+          echo "2. Commit and push to main branch"
