@@ -61,15 +61,55 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 }
 
-.sc-captcha-text {
-  font-size: 28px;
-  font-weight: bold;
-  color: #2a2a2a;
-  letter-spacing: 8px;
-  font-family: monospace;
-  text-align: center;
+.sc-captcha-svg-container {
+  display: flex;
+  align-items: center;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  padding: 10px;
+  border: 2px dashed #48d1cc;
+  min-height: 80px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  justify-content: center;
+}
+
+.sc-svg-captcha {
+  border-radius: 8px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #dee2e6 100%);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
   flex: 1;
-  text-shadow: 1px 1px 2px #48d1cc;
+  max-width: 280px;
+  /* Make SVG unselectable */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  /* Prevent dragging */
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  /* Disable context menu */
+  -webkit-touch-callout: none;
+  /* Disable highlighting */
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Make SVG text elements unselectable and uninteractable */
+.sc-svg-captcha text {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Prevent selection of all SVG content */
+.sc-svg-captcha * {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .sc-refresh-button {
@@ -299,6 +339,11 @@
   .sc-captcha-text {
     font-size: 24px;
     letter-spacing: 6px;
+  }
+
+  .sc-svg-captcha {
+    max-width: 240px;
+    height: 70px;
   }
 
   .sc-button-container {

@@ -5,6 +5,8 @@ import React, {
   useCallback,
   useRef,
   useEffect,
+  memo,
+  useMemo,
 } from "react";
 import { injectStyles } from "./styles";
 
@@ -21,6 +23,259 @@ const RefreshIcon = () => (
     />
   </svg>
 );
+
+// SVG CAPTCHA component with distortion effects
+const SvgCaptcha = memo(({ text }: { text: string }) => {
+  // Memoize the captcha configuration to prevent constant regeneration
+  const captchaConfig = useMemo(() => {
+    // Generate random colors for each character
+    const generateRandomColor = () => {
+      const colors = [
+        "#2C3E50",
+        "#34495E",
+        "#7F8C8D",
+        "#95A5A6",
+        "#BDC3C7",
+        "#E74C3C",
+        "#C0392B",
+        "#E67E22",
+        "#D35400",
+        "#F39C12",
+        "#F1C40F",
+        "#27AE60",
+        "#2ECC71",
+        "#16A085",
+        "#1ABC9C",
+        "#3498DB",
+        "#2980B9",
+        "#9B59B6",
+        "#8E44AD",
+      ];
+      return colors[Math.floor(Math.random() * colors.length)];
+    };
+
+    // Generate random rotation for each character
+    const generateRandomRotation = () => Math.random() * 30 - 15; // -15 to 15 degrees
+
+    // Generate random scale for each character
+    const generateRandomScale = () => 0.8 + Math.random() * 0.4; // 0.8 to 1.2
+
+    // Generate random vertical offset
+    const generateRandomOffset = () => Math.random() * 10 - 5; // -5 to 5 pixels
+
+    // Generate noise pattern for background
+    const generateNoisePattern = () => {
+      const points = [];
+      for (let i = 0; i < 50; i++) {
+        points.push({
+          x: Math.random() * 280,
+          y: Math.random() * 80,
+          radius: Math.random() * 2 + 1,
+        });
+      }
+      return points;
+    };
+
+    // Generate character configurations
+    const characterConfigs = text.split("").map(() => ({
+      color: generateRandomColor(),
+      rotation: generateRandomRotation(),
+      scale: generateRandomScale(),
+      offsetY: generateRandomOffset(),
+    }));
+
+    // Generate background elements
+    const noisePoints = generateNoisePattern();
+    const turbulenceSeed = Math.floor(Math.random() * 100);
+
+    // Generate distraction lines
+    const distractionLines = [
+      {
+        path: `M${Math.random() * 50},${20 + Math.random() * 40} Q${
+          70 + Math.random() * 50
+        },${10 + Math.random() * 60} ${150 + Math.random() * 50},${
+          30 + Math.random() * 20
+        }`,
+      },
+      {
+        path: `M${200 + Math.random() * 30},${15 + Math.random() * 50} Q${
+          230 + Math.random() * 20
+        },${40 + Math.random() * 20} ${260 + Math.random() * 15},${
+          25 + Math.random() * 30
+        }`,
+      },
+    ];
+
+    // Generate additional distraction elements
+    const distractionElements = {
+      circle: {
+        cx: 50 + Math.random() * 180,
+        cy: 20 + Math.random() * 40,
+      },
+      rect: {
+        x: 100 + Math.random() * 80,
+        y: 55 + Math.random() * 15,
+        rotation: Math.random() * 60 - 30,
+      },
+    };
+
+    return {
+      characterConfigs,
+      noisePoints,
+      turbulenceSeed,
+      distractionLines,
+      distractionElements,
+    };
+  }, [text]); // Only regenerate when text changes
+
+  return (
+    <svg
+      width="280"
+      height="80"
+      viewBox="0 0 280 80"
+      className="sc-svg-captcha"
+      style={{ userSelect: "none" }}
+      onContextMenu={(e) => e.preventDefault()}
+      onDragStart={(e) => e.preventDefault()}
+    >
+      <defs>
+        {/* Gradient definitions for visual appeal */}
+        <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#f8f9fa" stopOpacity="0.8" />
+          <stop offset="50%" stopColor="#e9ecef" stopOpacity="0.6" />
+          <stop offset="100%" stopColor="#dee2e6" stopOpacity="0.4" />
+        </linearGradient>
+
+        {/* Distortion filters */}
+        <filter id="distortion" x="-20%" y="-20%" width="140%" height="140%">
+          <feTurbulence
+            baseFrequency="0.02 0.03"
+            numOctaves="2"
+            result="turbulence"
+            seed={captchaConfig.turbulenceSeed}
+          />
+          <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="3" />
+        </filter>
+
+        {/* Shadow filter */}
+        <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+          <feDropShadow
+            dx="1"
+            dy="1"
+            stdDeviation="1"
+            floodColor="rgba(0,0,0,0.3)"
+          />
+        </filter>
+
+        {/* Stroke pattern */}
+        <pattern
+          id="linePattern"
+          patternUnits="userSpaceOnUse"
+          width="4"
+          height="4"
+        >
+          <rect width="4" height="4" fill="none" />
+          <path d="M0,4 L4,0" stroke="rgba(0,0,0,0.1)" strokeWidth="0.5" />
+        </pattern>
+      </defs>
+
+      {/* Background with gradient */}
+      <rect width="280" height="80" fill="url(#bgGradient)" />
+
+      {/* Background pattern overlay */}
+      <rect width="280" height="80" fill="url(#linePattern)" opacity="0.5" />
+
+      {/* Background noise points */}
+      {captchaConfig.noisePoints.map((point, index) => (
+        <circle
+          key={`noise-${index}`}
+          cx={point.x}
+          cy={point.y}
+          r={point.radius}
+          fill="rgba(0,0,0,0.1)"
+          opacity="0.3"
+        />
+      ))}
+
+      {/* Distraction lines */}
+      {captchaConfig.distractionLines.map((line, index) => (
+        <path
+          key={`line-${index}`}
+          d={line.path}
+          stroke="rgba(0,0,0,0.2)"
+          strokeWidth="1.5"
+          fill="none"
+          opacity="0.6"
+        />
+      ))}
+
+      {/* Render each character with individual transformations */}
+      {text.split("").map((char, index) => {
+        const x = 35 + index * 45; // Base spacing between characters
+        const y = 45; // Base y position
+        const config = captchaConfig.characterConfigs[index];
+
+        return (
+          <g key={`char-${index}`}>
+            {/* Character shadow/outline for better readability */}
+            <text
+              x={x + 1}
+              y={y + config.offsetY + 1}
+              fontSize="32"
+              fontFamily="Arial, sans-serif"
+              fontWeight="bold"
+              fill="rgba(0,0,0,0.3)"
+              textAnchor="middle"
+              dominantBaseline="middle"
+              transform={`rotate(${config.rotation} ${x} ${
+                y + config.offsetY
+              }) scale(${config.scale})`}
+              filter="url(#distortion)"
+            >
+              {char}
+            </text>
+
+            {/* Main character */}
+            <text
+              x={x}
+              y={y + config.offsetY}
+              fontSize="32"
+              fontFamily="Arial, sans-serif"
+              fontWeight="bold"
+              fill={config.color}
+              textAnchor="middle"
+              dominantBaseline="middle"
+              transform={`rotate(${config.rotation} ${x} ${
+                y + config.offsetY
+              }) scale(${config.scale})`}
+              filter="url(#distortion)"
+            >
+              {char}
+            </text>
+          </g>
+        );
+      })}
+
+      {/* Additional distraction elements */}
+      <circle
+        cx={captchaConfig.distractionElements.circle.cx}
+        cy={captchaConfig.distractionElements.circle.cy}
+        r="2"
+        fill="rgba(0,0,0,0.2)"
+        opacity="0.5"
+      />
+      <rect
+        x={captchaConfig.distractionElements.rect.x}
+        y={captchaConfig.distractionElements.rect.y}
+        width="3"
+        height="8"
+        fill="rgba(0,0,0,0.15)"
+        transform={`rotate(${captchaConfig.distractionElements.rect.rotation})`}
+        opacity="0.4"
+      />
+    </svg>
+  );
+});
 
 export interface SimplifyCaptchaProps {
   onMessage: (event: { nativeEvent: { data: string } }) => void;
@@ -531,8 +786,8 @@ const SimplifyCaptcha = forwardRef<SimplifyCaptchaRef, SimplifyCaptchaProps>(
         <h3 className="sc-title">Humanity Verification</h3>
         <p className="sc-subtitle">Please enter the text shown below</p>
         <div className="sc-captcha-container">
-          <div className="sc-captcha-text-container">
-            <span className="sc-captcha-text">{captchaText}</span>
+          <div className="sc-captcha-svg-container">
+            <SvgCaptcha text={captchaText} />
             <button
               className="sc-refresh-button"
               onClick={refreshCaptcha}
