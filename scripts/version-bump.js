@@ -229,12 +229,20 @@ class VersionBumper {
    */
   commitVersionBump(newVersion, bumpType) {
     try {
-      execSync("git add package.json", { stdio: "inherit" });
-      execSync(
-        `git commit -m "chore: bump version to ${newVersion} (${bumpType})"`,
-        { stdio: "inherit" }
-      );
-      console.log(`📝 Created commit for version ${newVersion}`);
+      if (process.argv.includes('--pre-commit')) {
+        // When called from pre-commit hook, just stage the package.json
+        // The version bump will be included in the current commit
+        execSync("git add package.json", { stdio: "inherit" });
+        console.log(`📝 Staged package.json with version ${newVersion} for current commit`);
+      } else {
+        // Normal operation - create a separate commit for version bump
+        execSync("git add package.json", { stdio: "inherit" });
+        execSync(
+          `git commit -m "chore: bump version to ${newVersion} (${bumpType})"`,
+          { stdio: "inherit" }
+        );
+        console.log(`📝 Created commit for version ${newVersion}`);
+      }
     } catch (error) {
       console.error("Error committing version bump:", error.message);
       process.exit(1);
@@ -271,6 +279,27 @@ class VersionBumper {
           );
           console.log("Uncommitted files:");
           uncommittedFiles.forEach((file) => console.log(`  ${file}`));
+          process.exit(1);
+        }
+      } catch (error) {
+        console.error("Error checking git status:", error.message);
+        process.exit(1);
+      }
+    } else {
+      // When called from pre-commit hook, only check for unstaged changes
+      try {
+        const status = execSync("git diff --name-only", { encoding: "utf8" });
+        const unstagedFiles = status
+          .split("\n")
+          .filter((line) => line.trim())
+          .filter((line) => !line.includes("package.json"));
+
+        if (unstagedFiles.length > 0) {
+          console.error(
+            "Error: You have unstaged changes. Please stage them first."
+          );
+          console.log("Unstaged files:");
+          unstagedFiles.forEach((file) => console.log(`  ${file}`));
           process.exit(1);
         }
       } catch (error) {

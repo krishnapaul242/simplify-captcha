@@ -71,20 +71,17 @@ function main() {
   console.log("📦 Running automatic version bump...");
 
   try {
-    // Run the version bump script with auto flag
-    execSync("node scripts/version-bump.js --auto", {
+    // Run the version bump script with auto and pre-commit flags
+    execSync("node scripts/version-bump.js --auto --pre-commit", {
       stdio: "inherit",
       cwd: process.cwd(),
     });
 
     console.log("✅ Version bump completed successfully");
-
-    // The version bump script will have created a new commit
-    // We need to exit with code 1 to stop the current commit
-    console.log(
-      "ℹ️  Your changes have been committed with an automatic version bump"
-    );
-    process.exit(1);
+    console.log("ℹ️  Package.json version updated and included in this commit");
+    
+    // Allow the commit to continue with the updated package.json
+    process.exit(0);
   } catch (error) {
     console.error("❌ Version bump failed:", error.message);
     console.log("ℹ️  Continuing with original commit...");
