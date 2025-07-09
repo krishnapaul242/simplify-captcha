@@ -1,6 +1,26 @@
 # SimplifyCaptcha
 
-A modern React CAPTCHA component library with advanced human verification capabilities. Originally adapted from React Native, this library provides intelligent behavior analysis and fallback text-based verification.
+A modern React CAPTCHA component library with advanced human verification capabilities. Originally ad3. **Device-Adaptive Scoring**: Automatically detects device capabilities and adjusts scoring:
+
+- **Desktop**: Focuses on mouse movement patterns and click behaviors
+- **Mobile**: Emphasizes touch gestures and natural finger interactions
+- **Cross-platform**: Adapts to device pixel ratio and input capabilities
+
+4. **Intelligent Human Detection**: Advanced algorithm analyzes multiple factors:
+   - Time spent on page and interaction frequency
+   - Natural timing variations in user actions
+   - Device-appropriate interaction patterns
+   - Behavioral consistency and human-like randomness
+
+5. **Automatic Verification**: If the human score is high enough (≥80%), verification passes automatically
+
+6. **SVG-Based Fallback CAPTCHA**: When automatic verification fails, a beautiful SVG-rendered CAPTCHA is presented with:
+   - **Advanced distortion effects** using SVG filters and transformations
+   - **Noise patterns** and visual interference to prevent OCR attacks
+   - **Dynamic character styling** with random colors, rotations, and scales
+   - **Accessibility features** maintaining readability for humans
+
+7. **Multiple Attempts**: Users get up to 30 attempts to solve the text CAPTCHA Native, this library provides intelligent behavior analysis and fallback text-based verification.
 
 ## 📖 Documentation
 
@@ -20,13 +40,15 @@ The complete documentation includes:
 - 👆 **Touch Gesture Recognition** - Detects multi-touch gestures and natural mobile interactions  
 - ⌨️ **Keyboard Pattern Analysis** - Monitors typing rhythm and natural keystroke variations
 - 📜 **Scroll Behavior Monitoring** - Tracks natural scrolling patterns and content engagement
-- 🔒 **Text-based Fallback** - Traditional CAPTCHA when automatic verification fails
+- 🎨 **SVG-based CAPTCHA Rendering** - High-quality, scalable vector graphics with distortion effects
+- 🔒 **Advanced Text Fallback** - Beautiful SVG-rendered CAPTCHA with noise patterns and distortions
 - 📱 **Responsive Design** - Works seamlessly on desktop and mobile devices
 - 🎨 **Customizable Styling** - Easy to customize with CSS classes and inline styles
 - ⚡ **TypeScript Support** - Full TypeScript definitions included
 - 🚀 **Easy Integration** - Simple API with ref-based control
 - 🎯 **Zero CSS Imports** - Styles are automatically injected, no separate CSS imports needed
-- 📈 **Automatic Version Bumping** - Intelligent semantic versioning based on change analysis
+- 📈 **Automatic Version Bumping** - Intelligent semantic versioning with pre-commit hooks
+- 🔧 **Development Tools** - Built-in version management and git hooks for seamless development
 
 ## Installation
 
@@ -206,7 +228,53 @@ npm run build:lib
 
 # Serve documentation locally
 npm run serve:docs
+
+# Version management
+npm run version:bump          # Manual version bump with confirmation
+npm run version:bump:auto     # Automatic version bump
+npm run install:hooks         # Install pre-commit hooks for auto-versioning
+npm run uninstall:hooks       # Remove pre-commit hooks
 ```
+
+## 🔧 Version Management
+
+This project includes an intelligent automatic version bumping system:
+
+### Quick Setup
+
+```bash
+# Install pre-commit hooks for automatic version bumping
+npm run install:hooks
+
+# Now every commit will automatically bump the version based on your changes!
+```
+
+### Manual Version Bumping
+
+```bash
+# Analyze changes and bump version with confirmation
+npm run version:bump
+
+# Automatically bump version without confirmation  
+npm run version:bump:auto
+```
+
+### How It Works
+
+The system analyzes git changes and determines the appropriate semantic version bump:
+
+- **🔴 MAJOR** (X.0.0): Breaking changes, significant core library changes
+- **🟡 MINOR** (0.X.0): New features, components, API additions
+- **🟢 PATCH** (0.0.X): Bug fixes, documentation updates, small changes
+
+### Pre-commit Integration
+
+When pre-commit hooks are installed:
+
+1. Every commit is analyzed for changes
+2. Version is automatically bumped based on change significance
+3. Updated `package.json` is included in your commit
+4. No manual version management needed!
 
 ## 📖 Documentation Development
 
