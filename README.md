@@ -235,26 +235,60 @@ MIT
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome! Please follow these guidelines:
 
-For documentation contributions, edit files in the `docs/` directory and test locally before submitting.
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 🐛 Bug Reports
 
-```
+When reporting bugs, please include:
+
+- Clear description of the issue
+- Steps to reproduce
+- Expected vs actual behavior
+- Browser/environment details
+- Minimal code example
+
+### 💡 Feature Requests
+
+For new features:
+
+- Explain the use case and benefit
+- Provide examples of how it would be used
+- Consider backward compatibility
+
+### 🔧 Code Contributions
+
+1. **Fork** the repository
+2. **Create** a feature branch: `git checkout -b feature/amazing-feature`
+3. **Install** dependencies: `npm install`
+4. **Make** your changes
+5. **Test** locally: `npm run dev` and `npm run serve:docs`
+6. **Build** to ensure no errors: `npm run build`
+7. **Commit** with clear messages: `git commit -m 'Add amazing feature'`
+8. **Push** to your branch: `git push origin feature/amazing-feature`
+9. **Create** a Pull Request
+
+### 📖 Documentation Contributions
+
+For documentation updates:
+
+- Edit files in the `docs/` directory
+- Test locally with `npm run serve:docs`
+- Ensure responsive design works on mobile
+- Update code examples if needed
+- Check that interactive demo still functions
+
+### 🧪 Testing Guidelines
+
+- Test on multiple browsers (Chrome, Firefox, Safari, Edge)
+- Verify both desktop and mobile experiences
+- Ensure the behavior analysis works correctly
+- Test the fallback text CAPTCHA functionality
+
+### 📝 Code Style
+
+- Follow existing TypeScript patterns
+- Use meaningful variable and function names
+- Add JSDoc comments for public APIs
+- Maintain backward compatibility when possible
+
+Thank you for contributing to SimplifyCaptcha! 🎉
