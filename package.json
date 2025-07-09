@@ -1,6 +1,6 @@
 {
   "name": "simplify-captcha",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "A modern React CAPTCHA component library with advanced human verification",
   "type": "module",
   "main": "./dist/simplify-captcha.umd.cjs",
