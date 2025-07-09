@@ -4,12 +4,17 @@ A modern React CAPTCHA component library with advanced human verification capabi
 
 ## Features
 
-- 🤖 **Intelligent Behavior Analysis** - Automatically detects human-like interaction patterns
+- 🤖 **Intelligent Behavior Analysis** - Advanced real-time gesture and interaction tracking
+- 🖱️ **Mouse Movement Tracking** - Analyzes cursor patterns, velocity, and natural variations
+- 👆 **Touch Gesture Recognition** - Detects multi-touch gestures and natural mobile interactions  
+- ⌨️ **Keyboard Pattern Analysis** - Monitors typing rhythm and natural keystroke variations
+- 📜 **Scroll Behavior Monitoring** - Tracks natural scrolling patterns and content engagement
 - 🔒 **Text-based Fallback** - Traditional CAPTCHA when automatic verification fails
 - 📱 **Responsive Design** - Works seamlessly on desktop and mobile devices
 - 🎨 **Customizable Styling** - Easy to customize with CSS classes and inline styles
 - ⚡ **TypeScript Support** - Full TypeScript definitions included
 - 🚀 **Easy Integration** - Simple API with ref-based control
+- 🎯 **Zero CSS Imports** - Styles are automatically injected, no separate CSS imports needed
 
 ## Installation
 
@@ -17,14 +22,23 @@ A modern React CAPTCHA component library with advanced human verification capabi
 npm install simplify-captcha
 ```
 
+**Note**: No CSS imports are required! The component automatically injects its styles when used.
+
+The library exports the following TypeScript types:
+
+- `SimplifyCaptcha` - The main CAPTCHA component
+- `SimplifyCaptchaProps` - Props interface for the component  
+- `SimplifyCaptchaRef` - Ref interface for imperative methods
+- `injectStyles` - Utility function for manual style injection
+
 ## Quick Start
 
 ```tsx
 import React, { useRef } from 'react';
-import { TextCaptcha, TextCaptchaRef } from 'simplify-captcha';
+import { SimplifyCaptcha, SimplifyCaptchaRef } from 'simplify-captcha';
 
 function MyComponent() {
-  const captchaRef = useRef<TextCaptchaRef>(null);
+  const captchaRef = useRef<SimplifyCaptchaRef>(null);
 
   const handleCaptchaResult = (event: { nativeEvent: { data: string } }) => {
     const { data } = event.nativeEvent;
@@ -48,7 +62,7 @@ function MyComponent() {
         Verify I'm Human
       </button>
       
-      <TextCaptcha
+      <SimplifyCaptcha
         ref={captchaRef}
         onMessage={handleCaptchaResult}
       />
@@ -59,7 +73,7 @@ function MyComponent() {
 
 ## API Reference
 
-### TextCaptcha Props
+### SimplifyCaptcha Props
 
 | Prop | Type | Required | Description |
 |------|------|----------|-------------|
@@ -67,7 +81,7 @@ function MyComponent() {
 | `style` | `React.CSSProperties` | No | Custom inline styles |
 | `className` | `string` | No | Custom CSS class name |
 
-### TextCaptchaRef Methods
+### SimplifyCaptchaRef Methods
 
 | Method | Description |
 |--------|-------------|
@@ -84,13 +98,48 @@ The `onMessage` callback receives these possible results:
 
 ## How It Works
 
-1. **Background Analysis**: The component continuously analyzes user interaction patterns from the moment it mounts
-2. **Intelligent Scoring**: Based on factors like time spent, interaction patterns, and natural behavior indicators
-3. **Automatic Verification**: If the human score is high enough (≥80%), verification passes automatically
-4. **Fallback CAPTCHA**: If automatic verification fails, a traditional text-based CAPTCHA is presented
-5. **Multiple Attempts**: Users get up to 30 attempts to solve the text CAPTCHA
+1. **Real-Time Gesture Analysis**: The component continuously monitors user interactions including:
+   - **Mouse movements**: Cursor patterns, velocity changes, and natural variations
+   - **Touch gestures**: Multi-touch events, swipe patterns, and pressure sensitivity
+   - **Keyboard interactions**: Typing rhythm, keystroke timing, and natural variations
+   - **Scroll behavior**: Scrolling patterns indicating natural content consumption
+
+2. **Device-Adaptive Scoring**: Automatically detects device capabilities and adjusts scoring:
+   - **Desktop**: Focuses on mouse movement patterns and click behaviors
+   - **Mobile**: Emphasizes touch gestures and natural finger interactions
+   - **Cross-platform**: Adapts to device pixel ratio and input capabilities
+
+3. **Intelligent Human Detection**: Advanced algorithm analyzes multiple factors:
+   - Time spent on page and interaction frequency
+   - Natural timing variations in user actions
+   - Device-appropriate interaction patterns
+   - Behavioral consistency and human-like randomness
+
+4. **Automatic Verification**: If the human score is high enough (≥80%), verification passes automatically
+
+5. **Fallback CAPTCHA**: If automatic verification fails, a traditional text-based CAPTCHA is presented
+
+6. **Multiple Attempts**: Users get up to 30 attempts to solve the text CAPTCHA
 
 ## Customization
+
+### Automatic Style Injection
+
+The library automatically injects CSS styles when the component is used. This means:
+
+- ✅ **No CSS imports needed** - Just import the component and it works
+- ✅ **No build configuration required** - Styles are bundled with the JavaScript
+- ✅ **No style conflicts** - Styles are scoped with `sc-` prefix
+- ✅ **SSR compatible** - Only injects styles on the client side
+
+If you need manual control over style injection:
+
+```tsx
+import { injectStyles } from 'simplify-captcha';
+
+// Manually inject styles (optional - happens automatically)
+injectStyles();
+```
 
 ### Styling
 
@@ -117,7 +166,7 @@ The component uses CSS classes with the `sc-` prefix. You can override these sty
 ### Custom Styling with Props
 
 ```tsx
-<TextCaptcha
+<SimplifyCaptcha
   ref={captchaRef}
   onMessage={handleCaptchaResult}
   className="my-custom-captcha"

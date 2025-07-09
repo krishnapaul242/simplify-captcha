@@ -1,6 +1,6 @@
 {
   "name": "simplify-captcha",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A modern React CAPTCHA component library with advanced human verification",
   "type": "module",
   "main": "./dist/simplify-captcha.umd.cjs",
@@ -34,6 +34,7 @@
     "dev": "vite",
     "build": "tsc -p tsconfig.lib.json && vite build",
     "build:lib": "vite build",
+    "convert-css": "node scripts/css-to-ts.js",
     "lint": "eslint .",
     "preview": "vite preview",
     "prepublishOnly": "npm run build"

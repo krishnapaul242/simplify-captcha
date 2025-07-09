@@ -95,6 +95,56 @@
   border: 1px solid #4a5568;
 }
 
+/* Tracking Info Styles */
+.tracking-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  margin: 20px 0;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+}
+
+.stat-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background: #f8f9fa;
+  border-radius: 6px;
+  border-left: 3px solid #48d1cc;
+}
+
+.stat-label {
+  font-weight: 600;
+  color: #495057;
+  font-size: 0.9rem;
+}
+
+.stat-value {
+  font-weight: 700;
+  color: #48d1cc;
+  font-size: 1.1rem;
+  background: rgba(72, 209, 204, 0.1);
+  padding: 4px 8px;
+  border-radius: 4px;
+  min-width: 40px;
+  text-align: center;
+}
+
+.tracking-note {
+  margin-top: 15px;
+  padding: 15px;
+  background: #e3f2fd;
+  border: 1px solid #90caf9;
+  border-radius: 6px;
+  color: #1565c0;
+  font-style: italic;
+  text-align: center;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .demo-container {
