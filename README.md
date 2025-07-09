@@ -2,6 +2,17 @@
 
 A modern React CAPTCHA component library with advanced human verification capabilities. Originally adapted from React Native, this library provides intelligent behavior analysis and fallback text-based verification.
 
+## 📖 Documentation
+
+**[View Full Documentation →](https://krishnapaul242.github.io/simplify-captcha/)**
+
+The complete documentation includes:
+
+- 🎮 **Interactive Demo** - Test the component with live behavior tracking
+- 📋 **Comprehensive API Reference** - Complete TypeScript interfaces
+- 💻 **Code Examples** - Real-world usage patterns
+- 🚀 **Installation Guide** - Step-by-step setup instructions
+
 ## Features
 
 - 🤖 **Intelligent Behavior Analysis** - Advanced real-time gesture and interaction tracking
@@ -191,7 +202,25 @@ npm run build
 
 # Build library only
 npm run build:lib
+
+# Serve documentation locally
+npm run serve:docs
 ```
+
+## 📖 Documentation Development
+
+To work on the documentation:
+
+1. **Local Testing**: Run `npm run serve:docs` or use the quick-start scripts:
+   - Linux/Mac: `./quick-start.sh`
+   - Windows: `quick-start.bat`
+
+2. **GitHub Pages Setup**: See [GITHUB_PAGES_SETUP.md](GITHUB_PAGES_SETUP.md) for detailed deployment instructions
+
+3. **Documentation Files**:
+   - `docs/index.html` - Main documentation page
+   - `docs/styles.css` - Styling
+   - `docs/script.js` - Interactive demo functionality
 
 ## Browser Support
 
@@ -208,54 +237,7 @@ MIT
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
+For documentation contributions, edit files in the `docs/` directory and test locally before submitting.
   {
     files: ['**/*.{ts,tsx}'],
     extends: [
@@ -274,4 +256,5 @@ export default tseslint.config([
     },
   },
 ])
+
 ```

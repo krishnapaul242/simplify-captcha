@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SimplifyCaptcha - Modern React CAPTCHA Component</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="logo">🔒</span>
+                <span class="brand-text">SimplifyCaptcha</span>
+            </div>
+            <div class="nav-links">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#demo" class="nav-link">Demo</a>
+                <a href="#installation" class="nav-link">Installation</a>
+                <a href="#api" class="nav-link">API</a>
+                <a href="#examples" class="nav-link">Examples</a>
+                <a href="https://github.com/krishnapaul242/simplify-captcha" class="nav-link github-link"
+                    target="_blank">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                    </svg>
+                    GitHub
+                </a>
+            </div>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">
+                        Modern React CAPTCHA Component
+                        <span class="title-accent">with Intelligence</span>
+                    </h1>
+                    <p class="hero-description">
+                        Advanced human verification through intelligent behavior analysis, gesture tracking, and
+                        fallback text-based verification. Zero CSS imports required.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#installation" class="btn btn-primary">Get Started</a>
+                        <a href="#demo" class="btn btn-secondary">Try Demo</a>
+                    </div>
+                    <div class="version-badge">
+                        <span>v1.1.0</span>
+                        <span class="divider">•</span>
+                        <span>MIT Licensed</span>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="captcha-mockup">
+                        <div class="mockup-header">
+                            <div class="mockup-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="mockup-content">
+                            <div class="mockup-captcha">
+                                <div class="mockup-icon">🔒</div>
+                                <div class="mockup-text">Analyzing behavior...</div>
+                                <div class="mockup-progress">
+                                    <div class="progress-bar"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="features">
+            <div class="container">
+                <h2 class="section-title">Powerful Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🤖</div>
+                        <h3>Intelligent Behavior Analysis</h3>
+                        <p>Advanced real-time gesture and interaction tracking that distinguishes human behavior from
+                            bot patterns.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🖱️</div>
+                        <h3>Mouse Movement Tracking</h3>
+                        <p>Analyzes cursor patterns, velocity, acceleration, and natural variations in movement.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">👆</div>
+                        <h3>Touch Gesture Recognition</h3>
+                        <p>Detects multi-touch gestures, pressure sensitivity, and natural mobile interactions.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⌨️</div>
+                        <h3>Keyboard Pattern Analysis</h3>
+                        <p>Monitors typing rhythm, keystroke timing, and natural typing variations.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📜</div>
+                        <h3>Scroll Behavior Monitoring</h3>
+                        <p>Tracks natural scrolling patterns and content engagement behaviors.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔒</div>
+                        <h3>Text-based Fallback</h3>
+                        <p>Traditional CAPTCHA challenges when automatic verification needs additional confirmation.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📱</div>
+                        <h3>Responsive Design</h3>
+                        <p>Works seamlessly across desktop, tablet, and mobile devices with adaptive UI.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>TypeScript Support</h3>
+                        <p>Full TypeScript definitions with comprehensive type safety and IntelliSense.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <h3>Zero CSS Imports</h3>
+                        <p>Styles are automatically injected - no separate CSS imports or styling setup required.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Demo Section -->
+        <section id="demo" class="demo">
+            <div class="container">
+                <h2 class="section-title">Interactive Demo</h2>
+                <p class="section-description">
+                    Experience the CAPTCHA component in action. Move your mouse, scroll, or interact with the page to
+                    see intelligent behavior analysis.
+                </p>
+
+                <div class="demo-container">
+                    <div class="demo-left">
+                        <div class="demo-stats">
+                            <h3>Interaction Stats</h3>
+                            <div class="stats-grid">
+                                <div class="stat-item">
+                                    <span class="stat-label">Mouse Movements</span>
+                                    <span class="stat-value" id="mouse-count">0</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">Clicks</span>
+                                    <span class="stat-value" id="click-count">0</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">Scroll Events</span>
+                                    <span class="stat-value" id="scroll-count">0</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">Keystrokes</span>
+                                    <span class="stat-value" id="keystroke-count">0</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">Device Type</span>
+                                    <span class="stat-value" id="device-type">Desktop</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">Human Score</span>
+                                    <span class="stat-value" id="human-score">0%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="demo-right">
+                        <div class="demo-captcha-container">
+                            <div id="demo-captcha-placeholder" class="captcha-placeholder">
+                                <div class="placeholder-content">
+                                    <div class="placeholder-icon">🔒</div>
+                                    <h3>CAPTCHA Demo</h3>
+                                    <p>Click "Show CAPTCHA" to test the component</p>
+                                    <button id="show-captcha-btn" class="btn btn-primary">Show CAPTCHA</button>
+                                </div>
+                            </div>
+
+                            <div class="demo-results">
+                                <h4>Results</h4>
+                                <div id="demo-log" class="demo-log">
+                                    <p class="log-item">Ready to test CAPTCHA...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Installation Section -->
+        <section id="installation" class="installation">
+            <div class="container">
+                <h2 class="section-title">Installation</h2>
+                <div class="install-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Install via npm</h3>
+                            <pre><code class="language-bash">npm install simplify-captcha</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Import in your React component</h3>
+                            <pre><code class="language-tsx">import React, { useRef } from 'react';
+import { SimplifyCaptcha, SimplifyCaptchaRef } from 'simplify-captcha';</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Use the component</h3>
+                            <pre><code class="language-tsx">function MyComponent() {
+  const captchaRef = useRef&lt;SimplifyCaptchaRef&gt;(null);
+
+  const handleCaptchaResult = (event: { nativeEvent: { data: string } }) => {
+    const { data } = event.nativeEvent;
+    
+    switch (data) {
+      case 'verified':
+        console.log('✅ User verified successfully!');
+        break;
+      case 'cancel':
+        console.log('❌ User cancelled verification');
+        break;
+      default:
+        console.log('ℹ️ Unknown result:', data);
+    }
+  };
+
+  return (
+    &lt;div&gt;
+      &lt;SimplifyCaptcha
+        ref={captchaRef}
+        onMessage={handleCaptchaResult}
+      /&gt;
+      &lt;button onClick={() => captchaRef.current?.show()}&gt;
+        Show CAPTCHA
+      &lt;/button&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="install-note">
+                    <div class="note-icon">💡</div>
+                    <div class="note-content">
+                        <strong>No CSS imports required!</strong> The component automatically injects its styles when
+                        used.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- API Documentation -->
+        <section id="api" class="api-docs">
+            <div class="container">
+                <h2 class="section-title">API Reference</h2>
+
+                <div class="api-section">
+                    <h3>SimplifyCaptchaProps</h3>
+                    <div class="api-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Property</th>
+                                    <th>Type</th>
+                                    <th>Required</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>onMessage</code></td>
+                                    <td><code>(event: { nativeEvent: { data: string } }) => void</code></td>
+                                    <td>✅</td>
+                                    <td>Callback function called when CAPTCHA state changes</td>
+                                </tr>
+                                <tr>
+                                    <td><code>style</code></td>
+                                    <td><code>React.CSSProperties</code></td>
+                                    <td>❌</td>
+                                    <td>Custom inline styles for the component</td>
+                                </tr>
+                                <tr>
+                                    <td><code>className</code></td>
+                                    <td><code>string</code></td>
+                                    <td>❌</td>
+                                    <td>CSS class name for custom styling</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="api-section">
+                    <h3>SimplifyCaptchaRef</h3>
+                    <div class="api-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Method</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>show()</code></td>
+                                    <td><code>() => void</code></td>
+                                    <td>Shows the CAPTCHA verification dialog</td>
+                                </tr>
+                                <tr>
+                                    <td><code>hide()</code></td>
+                                    <td><code>() => void</code></td>
+                                    <td>Hides the CAPTCHA verification dialog</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="api-section">
+                    <h3>Event Data Values</h3>
+                    <div class="api-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Value</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>'verified'</code></td>
+                                    <td>User successfully passed verification</td>
+                                </tr>
+                                <tr>
+                                    <td><code>'cancel'</code></td>
+                                    <td>User cancelled the verification process</td>
+                                </tr>
+                                <tr>
+                                    <td><code>'failed'</code></td>
+                                    <td>Verification failed (too many attempts)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="api-section">
+                    <h3>Utility Functions</h3>
+                    <pre><code class="language-tsx">import { injectStyles } from 'simplify-captcha';
+
+// Manually inject styles (usually not needed)
+injectStyles();</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Examples Section -->
+        <section id="examples" class="examples">
+            <div class="container">
+                <h2 class="section-title">Examples</h2>
+
+                <div class="example-card">
+                    <h3>Basic Usage</h3>
+                    <pre><code class="language-tsx">import React, { useRef } from 'react';
+import { SimplifyCaptcha, SimplifyCaptchaRef } from 'simplify-captcha';
+
+function LoginForm() {
+  const captchaRef = useRef&lt;SimplifyCaptchaRef&gt;(null);
+
+  const handleLogin = () => {
+    // Show CAPTCHA before login
+    captchaRef.current?.show();
+  };
+
+  const handleCaptchaResult = (event: { nativeEvent: { data: string } }) => {
+    if (event.nativeEvent.data === 'verified') {
+      // Proceed with login
+      console.log('CAPTCHA verified, proceeding with login...');
+    }
+  };
+
+  return (
+    &lt;div&gt;
+      &lt;SimplifyCaptcha
+        ref={captchaRef}
+        onMessage={handleCaptchaResult}
+      /&gt;
+      &lt;button onClick={handleLogin}&gt;Login&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+                </div>
+
+                <div class="example-card">
+                    <h3>With Custom Styling</h3>
+                    <pre><code class="language-tsx">import React, { useRef } from 'react';
+import { SimplifyCaptcha, SimplifyCaptchaRef } from 'simplify-captcha';
+
+function StyledCaptcha() {
+  const captchaRef = useRef&lt;SimplifyCaptchaRef&gt;(null);
+
+  const customStyle: React.CSSProperties = {
+    border: '2px solid #007bff',
+    borderRadius: '8px',
+    backgroundColor: '#f8f9fa'
+  };
+
+  return (
+    &lt;SimplifyCaptcha
+      ref={captchaRef}
+      style={customStyle}
+      className="my-custom-captcha"
+      onMessage={(event) => {
+        console.log('CAPTCHA result:', event.nativeEvent.data);
+      }}
+    /&gt;
+  );
+}</code></pre>
+                </div>
+
+                <div class="example-card">
+                    <h3>Form Integration</h3>
+                    <pre><code class="language-tsx">import React, { useRef, useState } from 'react';
+import { SimplifyCaptcha, SimplifyCaptchaRef } from 'simplify-captcha';
+
+function ContactForm() {
+  const captchaRef = useRef&lt;SimplifyCaptchaRef&gt;(null);
+  const [isVerified, setIsVerified] = useState(false);
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!isVerified) {
+      captchaRef.current?.show();
+      return;
+    }
+    // Submit form
+    console.log('Submitting form...', formData);
+  };
+
+  const handleCaptchaResult = (event: { nativeEvent: { data: string } }) => {
+    if (event.nativeEvent.data === 'verified') {
+      setIsVerified(true);
+      // Auto-submit form after verification
+      console.log('CAPTCHA verified, submitting form...');
+    }
+  };
+
+  return (
+    &lt;form onSubmit={handleSubmit}&gt;
+      &lt;input
+        type="text"
+        placeholder="Name"
+        value={formData.name}
+        onChange={(e) => setFormData({...formData, name: e.target.value})}
+      /&gt;
+      &lt;input
+        type="email"
+        placeholder="Email"
+        value={formData.email}
+        onChange={(e) => setFormData({...formData, email: e.target.value})}
+      /&gt;
+      &lt;textarea
+        placeholder="Message"
+        value={formData.message}
+        onChange={(e) => setFormData({...formData, message: e.target.value})}
+      /&gt;
+      
+      &lt;SimplifyCaptcha
+        ref={captchaRef}
+        onMessage={handleCaptchaResult}
+      /&gt;
+      
+      &lt;button type="submit"&gt;
+        {isVerified ? '✅ Send Message' : 'Send Message'}
+      &lt;/button&gt;
+    &lt;/form&gt;
+  );
+}</code></pre>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <div class="footer-brand">
+                        <span class="logo">🔒</span>
+                        <span class="brand-text">SimplifyCaptcha</span>
+                    </div>
+                    <p>Modern React CAPTCHA component with intelligent behavior analysis.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4>Documentation</h4>
+                        <a href="#installation">Installation</a>
+                        <a href="#api">API Reference</a>
+                        <a href="#examples">Examples</a>
+                    </div>
+                    <div class="link-group">
+                        <h4>Community</h4>
+                        <a href="https://github.com/krishnapaul242/simplify-captcha" target="_blank">GitHub</a>
+                        <a href="https://www.npmjs.com/package/simplify-captcha" target="_blank">npm</a>
+                        <a href="https://github.com/krishnapaul242/simplify-captcha/issues" target="_blank">Issues</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Krishna Paul. Licensed under MIT.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

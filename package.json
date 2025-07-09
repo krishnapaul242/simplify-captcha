@@ -30,10 +30,16 @@
     "type": "git",
     "url": "https://github.com/krishnapaul242/simplify-captcha.git"
   },
+  "homepage": "https://krishnapaul242.github.io/simplify-captcha/",
+  "bugs": {
+    "url": "https://github.com/krishnapaul242/simplify-captcha/issues"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc -p tsconfig.lib.json && vite build",
     "build:lib": "vite build",
+    "build:docs": "npm run build && echo 'Documentation built successfully'",
+    "serve:docs": "npx http-server docs -p 8080 -o",
     "convert-css": "node scripts/css-to-ts.js",
     "lint": "eslint .",
     "preview": "vite preview",
