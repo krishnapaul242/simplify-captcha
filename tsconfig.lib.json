@@ -1,0 +1,18 @@
+{
+    "extends": "./tsconfig.app.json",
+    "compilerOptions": {
+        "declaration": true,
+        "emitDeclarationOnly": true,
+        "outDir": "./dist",
+        "noEmit": false,
+        "verbatimModuleSyntax": false
+    },
+    "include": [
+        "src/lib/**/*"
+    ],
+    "exclude": [
+        "src/demo/**/*",
+        "**/*.test.*",
+        "**/*.spec.*"
+    ]
+}
