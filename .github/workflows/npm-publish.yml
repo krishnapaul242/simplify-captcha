@@ -9,7 +9,7 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -39,7 +39,7 @@ jobs:
           # Get the current version from package.json
           CURRENT_VERSION=$(node -p "require('./package.json').version")
           echo "current-version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
-          
+
           # Check if this version exists on npm
           if npm view simplify-captcha@$CURRENT_VERSION version 2>/dev/null; then
             echo "Version $CURRENT_VERSION already exists on npm"
@@ -49,9 +49,15 @@ jobs:
             echo "should-publish=true" >> $GITHUB_OUTPUT
           fi
 
-      - name: Publish to NPM
+      - name: Publish to NPM (with retries)
         if: steps.version-check.outputs.should-publish == 'true'
-        run: npm publish
+        run: |
+          for i in {1..5}; do
+            npm publish && break || {
+              echo "Publish failed, retrying in 10s (attempt $i/5)...";
+              sleep 10;
+            }
+          done
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
@@ -65,13 +71,13 @@ jobs:
           release_name: Release v${{ steps.version-check.outputs.current-version }}
           body: |
             ## Changes in v${{ steps.version-check.outputs.current-version }}
-            
+
             This release was automatically created when the package was published to npm.
-            
+
             ### Package Info
             - Package: simplify-captcha@${{ steps.version-check.outputs.current-version }}
             - NPM: https://www.npmjs.com/package/simplify-captcha
-            
+
             For detailed changes, see the commit history.
           draft: false
           prerelease: false

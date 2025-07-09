@@ -1,6 +1,6 @@
 {
   "name": "simplify-captcha",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "A modern React CAPTCHA component library with advanced human verification",
   "type": "module",
   "main": "./dist/simplify-captcha.umd.cjs",
@@ -43,7 +43,11 @@
     "convert-css": "node scripts/css-to-ts.js",
     "lint": "eslint .",
     "preview": "vite preview",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "version:bump": "node scripts/version-bump.js",
+    "version:bump:auto": "node scripts/version-bump.js --auto",
+    "install:hooks": "node scripts/install-hooks.js install",
+    "uninstall:hooks": "node scripts/install-hooks.js uninstall"
   },
   "dependencies": {
     "react": "^19.1.0",

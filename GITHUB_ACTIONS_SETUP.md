@@ -39,6 +39,7 @@ The workflow (`/.github/workflows/npm-publish.yml`) will:
 To publish a new version:
 
 1. **Update Version:**
+
    ```bash
    # Increment patch version (1.1.1 → 1.1.2)
    npm version patch
@@ -51,6 +52,7 @@ To publish a new version:
    ```
 
 2. **Push to Main:**
+
    ```bash
    git push origin main --tags
    ```
@@ -64,6 +66,7 @@ To publish a new version:
 ### 4. Manual Triggering
 
 You can also manually trigger the workflow:
+
 - Go to Actions tab in your GitHub repository
 - Select "Publish to NPM" workflow
 - Click "Run workflow"
@@ -77,7 +80,7 @@ You can also manually trigger the workflow:
 
 ## Troubleshooting
 
-### Common Issues:
+### Common Issues
 
 1. **"NPM_TOKEN not found"**
    - Ensure you've added the NPM_TOKEN secret in repository settings
