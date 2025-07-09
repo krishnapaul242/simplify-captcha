@@ -26,6 +26,7 @@ The complete documentation includes:
 - ⚡ **TypeScript Support** - Full TypeScript definitions included
 - 🚀 **Easy Integration** - Simple API with ref-based control
 - 🎯 **Zero CSS Imports** - Styles are automatically injected, no separate CSS imports needed
+- 📈 **Automatic Version Bumping** - Intelligent semantic versioning based on change analysis
 
 ## Installation
 
