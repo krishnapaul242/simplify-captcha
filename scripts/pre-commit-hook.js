@@ -79,7 +79,7 @@ function main() {
 
     console.log("✅ Version bump completed successfully");
     console.log("ℹ️  Package.json version updated and included in this commit");
-    
+
     // Allow the commit to continue with the updated package.json
     process.exit(0);
   } catch (error) {

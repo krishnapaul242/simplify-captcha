@@ -229,11 +229,13 @@ class VersionBumper {
    */
   commitVersionBump(newVersion, bumpType) {
     try {
-      if (process.argv.includes('--pre-commit')) {
+      if (process.argv.includes("--pre-commit")) {
         // When called from pre-commit hook, just stage the package.json
         // The version bump will be included in the current commit
         execSync("git add package.json", { stdio: "inherit" });
-        console.log(`📝 Staged package.json with version ${newVersion} for current commit`);
+        console.log(
+          `📝 Staged package.json with version ${newVersion} for current commit`
+        );
       } else {
         // Normal operation - create a separate commit for version bump
         execSync("git add package.json", { stdio: "inherit" });
@@ -265,7 +267,7 @@ class VersionBumper {
 
     // Check for uncommitted changes (excluding package.json)
     // Skip this check if called from pre-commit hook
-    if (!process.argv.includes('--pre-commit')) {
+    if (!process.argv.includes("--pre-commit")) {
       try {
         const status = execSync("git status --porcelain", { encoding: "utf8" });
         const uncommittedFiles = status

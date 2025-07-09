@@ -485,7 +485,7 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-console.log('🎯 SimplifyCaptcha component example loaded!');
-    
-    // Log component initialization
-    console.log('📦 Version: 1.3.0');
+console.log("🎯 SimplifyCaptcha component example loaded!");
+
+// Log component initialization
+console.log("📦 Version: 1.3.0");
